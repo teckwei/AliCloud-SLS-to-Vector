@@ -1,0 +1,20 @@
+sources:
+  sls_http:
+    type: http #Vector starts a simple HTTP server to receive incoming data.
+    address: "0.0.0.0:8686"
+    encoding: json #Expects to be in JSON format.
+
+sinks:
+  hydrolix:
+    type: http #Sends the processed data out via HTTP POST requests 
+    inputs:
+      - sls_http #Should be set to match your source name — e.g., replace <data source> with sls_http
+    uri: "https://demo.trafficpeak.live/ingest/event"
+    encoding:
+      codec: json #Expects to be in JSON format.
+    compression: gzip #expected gzip compression applied
+    request:
+      headers:
+        X-HDX-Table: “<hydrolix table>“
+        X-HDX-Transform: “<hydrolix data transformation rules>“
+        Authorization: "Bearer <authentication code provided by hydrolix> “
