@@ -9,7 +9,7 @@ sinks:
     type: http #Sends the processed data out via HTTP POST requests 
     inputs:
       - sls_http #Should be set to match your source name — e.g., replace <data source> with sls_http
-    uri: "https://demo.trafficpeak.live/ingest/event"
+    uri: "<hydrolix endpoint URL>"
     encoding:
       codec: json #Expects to be in JSON format.
     compression: gzip #expected gzip compression applied
